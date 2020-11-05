@@ -27,7 +27,7 @@ public class PackageValidator {
         }
 
         try {
-            final double weight = Double.parseDouble(info[0]);
+            final float weight = Float.parseFloat(info[0]);
 
             if (weight <= 0) {
                 return false;

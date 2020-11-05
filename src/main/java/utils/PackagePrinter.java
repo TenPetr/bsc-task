@@ -2,7 +2,8 @@ package utils;
 
 import java.util.TimerTask;
 
-import static utils.PackageUtils.PACKAGES;
+import static factory.DecimalPlacesFactory.addDecimalPlaces;
+import static utils.PackageUtils.packages;
 
 public class PackagePrinter {
 
@@ -10,8 +11,10 @@ public class PackagePrinter {
         return new TimerTask() {
             @Override
             public void run() {
-                if (PACKAGES.size() != 0) {
-                    System.out.println(PACKAGES.toString());
+                if (packages.size() != 0) {
+                    System.out.println("----------------");
+                    packages.forEach((k, v) -> System.out.println(k + " " + addDecimalPlaces(v)));
+                    System.out.println("----------------");
                 }
             }
         };

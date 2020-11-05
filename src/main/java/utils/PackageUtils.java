@@ -9,13 +9,14 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Timer;
 
+import static java.util.stream.Collectors.toMap;
 import static utils.PackageConvertor.convertPackage;
 import static utils.PackagePrinter.createPrintTask;
 import static utils.PackageValidator.isPackageValid;
 
 public class PackageUtils {
 
-    public static final Map<String, Double> PACKAGES = new LinkedHashMap<>();
+    public static Map<String, Float> packages = new LinkedHashMap<>();
 
     private static final Timer timer = new Timer();
 
@@ -60,10 +61,17 @@ public class PackageUtils {
     }
 
     private static void createOrUpdateInfo(final PackageInfo packageInfo) {
-        var updatedPackage = PACKAGES.computeIfPresent(
+        Float updatedPackage = packages.computeIfPresent(
                 packageInfo.getPostalCode(), (k, v) -> v + packageInfo.getWeight());
         if (updatedPackage == null) {
-            PACKAGES.put(packageInfo.getPostalCode(), packageInfo.getWeight());
+            packages.put(packageInfo.getPostalCode(), packageInfo.getWeight());
         }
+        packages = sortPackages();
+    }
+
+    private static LinkedHashMap<String, Float> sortPackages() {
+        return packages.entrySet().stream()
+                .sorted(Map.Entry.<String, Float>comparingByValue().reversed())
+                .collect(toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
     }
 }

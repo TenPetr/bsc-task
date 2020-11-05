@@ -9,7 +9,7 @@ public class PackageConvertorTest {
 
     @Test
     void convertPackageShouldReturnCorrectObject() {
-        final PackageInfo expected = new PackageInfo("12345", 122.34);
+        final PackageInfo expected = new PackageInfo("12345", 122.34f);
 
         final PackageInfo actual = convertPackage("122.34 12345");
 

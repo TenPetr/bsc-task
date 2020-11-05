@@ -4,9 +4,9 @@ public class PackageInfo {
 
     private String postalCode;
 
-    private Double weight;
+    private Float weight;
 
-    public PackageInfo(final String postalCode, final Double weight) {
+    public PackageInfo(final String postalCode, final Float weight) {
         this.postalCode = postalCode;
         this.weight = weight;
     }
@@ -19,11 +19,11 @@ public class PackageInfo {
         this.postalCode = postalCode;
     }
 
-    public Double getWeight() {
+    public Float getWeight() {
         return weight;
     }
 
-    public void setWeight(final Double weight) {
+    public void setWeight(final Float weight) {
         this.weight = weight;
     }
 
