@@ -1,11 +1,10 @@
-import static utils.PackageUtils.printAllPackages;
-import static utils.PackageUtils.saveUsersInput;
+import static utils.PackageUtils.*;
 
 public class Main {
 
     public static void main(final String[] args) {
         if (hasInitialPackages(args)) {
-            // TODO: Initial packages from cmd. arg.
+            loadInitialPackages(args);
         }
         printAllPackages();
         saveUsersInput();
