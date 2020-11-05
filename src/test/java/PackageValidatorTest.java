@@ -1,6 +1,6 @@
-import Utils.PackageValidator;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import utils.PackageValidator;
 
 import java.util.stream.Stream;
 
@@ -13,7 +13,7 @@ public class PackageValidatorTest {
         return Stream.of(
                 "", " ", null, "123.1234 12345", "123.12 12", "test",
                 "test test", "12.test 1234", "-12.23 12345",
-                "123.x12 12345", "0 12345", "123.124 12x45");
+                "123.x12 12345", "0 12345", "123.124 12x45", "122. 12123");
     }
 
     private static Stream<String> correctInputs() {

@@ -1,4 +1,4 @@
-package Utils;
+package utils;
 
 public class PackageValidator {
 
@@ -22,7 +22,7 @@ public class PackageValidator {
             return false;
         }
 
-        if (!postalCodeHasCorrectFormat(info[1])) {
+        if (!hasPostalCodeCorrectFormat(info[1])) {
             return false;
         }
 
@@ -44,12 +44,15 @@ public class PackageValidator {
 
     private static boolean containsMoreThanThreeDecimal(final String input) {
         if (input.contains(DOT)) {
+            if (input.split(DOT_REGEX).length != 2) {
+                return true;
+            }
             return input.split(DOT_REGEX)[1].length() > 3;
         }
         return false;
     }
 
-    private static boolean postalCodeHasCorrectFormat(final String input) {
+    private static boolean hasPostalCodeCorrectFormat(final String input) {
         return input.length() == 5 && input.matches(NUMBERS);
     }
 }
