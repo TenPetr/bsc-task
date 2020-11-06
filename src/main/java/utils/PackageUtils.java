@@ -38,7 +38,7 @@ public class PackageUtils {
         } catch (final Exception ignored) { }
     }
 
-    public static void saveUsersInput() {
+    public static void processUsersInput() {
         final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
@@ -53,12 +53,13 @@ public class PackageUtils {
             }
 
             if (!isPackageValid(input)) {
-                LOGGER.log(Level.SEVERE, "Package format is not valid.");
+                LOGGER.log(Level.WARNING, "Package format is not valid.");
                 continue;
             }
 
             final PackageInfo packageInfo = convertPackage(input);
             createOrUpdateInfo(packageInfo);
+            packages = sortPackages();
         }
     }
 
@@ -68,6 +69,7 @@ public class PackageUtils {
                 final Stream<String> lines = Files.lines(Path.of(RESOURCES + filename));
                 final Stream<String> filtered = lines.filter(PackageValidator::isPackageValid);
                 filtered.map(PackageConvertor::convertPackage).forEach(PackageUtils::createOrUpdateInfo);
+                packages = sortPackages();
             } catch (final IOException ignored) {
                 LOGGER.log(Level.SEVERE, "Error while loading initial packages.");
             }
@@ -80,7 +82,6 @@ public class PackageUtils {
         if (updatedPackage == null) {
             packages.put(packageInfo.getPostalCode(), packageInfo.getWeight());
         }
-        packages = sortPackages();
     }
 
     private static LinkedHashMap<String, Float> sortPackages() {

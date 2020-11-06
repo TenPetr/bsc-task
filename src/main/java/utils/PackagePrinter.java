@@ -14,7 +14,7 @@ public class PackagePrinter {
         return new TimerTask() {
             @Override
             public void run() {
-                if (packages.size() != 0) {
+                if (!arePackagesEmpty()) {
                     System.out.println("----------------");
                     packages.forEach(
                             (k, v) -> System.out.println(
@@ -23,5 +23,9 @@ public class PackagePrinter {
                 }
             }
         };
+    }
+
+    private static boolean arePackagesEmpty() {
+        return packages.size() == 0;
     }
 }
